@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        width: 400px;
+        height: 300px;
+        background-color: darkseagreen;
+      }
+      .card {
+        padding: 10px;
+        margin: 5px;
+        background-color: rgb(177, 230, 177);
+        display: inline-block;
+      }
+      #check {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+    <!-- <img
+      id="drag1"
+      src="./images/photo1611217230.jpeg"
+      draggable="true"
+      ondragstart="drag(event)"
+    /> -->
+    <div id="drag1" draggable="true" ondragstart="drag(event)" class="card">
+      dog 
+    </div>
+    <div id="drag2" draggable="true" ondragstart="drag(event)" class="card">
+      and 
+    </div>
+    <div id="drag3" draggable="true" ondragstart="drag(event)" class="card">
+      cat 
+    </div>
+    <button id="check">Check</button>
+    <script>
+      function allowDrop(event) {
+        event.preventDefault();
+      }
+      function drag(event) {
+        let sourse = event.target;
+        event.dataTransfer.setData("text", sourse.innerText);
+      }
+      function drop(event) {
+        event.preventDefault();
+        let data = event.dataTransfer.getData("text");
+        //event.target.appendChild(document.getElementById(data));
+        let drop = event.target;
+        drop.innerText += data;
+      }
+
+      let checkButton = document.getElementById("check");
+      checkButton.addEventListener("click", check);
+      function check() {
+        let div1 = document.getElementById("div1");
+        let str = div1.innerText;
+        let phrase = "catanddog";
+        console.log(str.split(" ").join(""));
+        if (phrase == str.split(" ").join("")) {
+          alert("Correct!");
+        } else alert("Incorrect!");
+      }
+    </script>
+  </body>
+</html>
